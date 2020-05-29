@@ -353,13 +353,13 @@
     <Folder Include="App_Data\" />
     <Folder Include="fonts\" />
     <Folder Include="Scripts\" />
-    <Folder Include="Views\Statistic\" />
     <Folder Include="Views\ThuongHieu\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Views\Home\_Blocks.cshtml" />
     <Content Include="Views\Product\SingleProduct.cshtml" />
+    <Content Include="Views\Statistic\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
