@@ -1,0 +1,55 @@
+﻿<div class="duoi">
+    <h3 class="tieudetimkiem">Tìm kiếm sản phẩm</h3>
+    <div class="row">
+        <div class="col-md-2 phan_nhap">
+            <h4 class="tieudegia">Giá Từ</h4>
+            <br />
+            <br />
+            <h4 class="tieudeden">Giá Đến</h4>
+
+        </div>
+        <form action="/Statistic/KetQuaTimKiem" method="get">
+            <div class="col-md-7">
+                <input type="text" name="giatu" />VNĐ
+                <input type="text" name="giaden" />VNĐ
+
+                <div class="form-group">
+                    <label for="sel1">Chọn khoảng giá:</label>
+                    <select class="form-control" id="sel1" name="khoanggia">
+
+                        <option value="1">Dưới 1 triệu</option>
+                        <option value="2">1 - 2 Triệu</option>
+                        <option value="3">2 - 3 Triệu</option>
+                        <option value="4">3 - 4 triệu</option>
+                        <option value="5">4 - 5 triệu</option>
+                        <option value="6">Trên 5 triệu</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sel1">Chọn Thương Hiệu:</label>
+                    <select class="form-control" id="sel1" name="idth">
+                        @foreach (var item in ViewBag.listThuongHieu)
+                        {
+                            <option value="@item.Id">@item.TenThuongHieu</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sel1">Chọn loại sản phẩm:</label>
+                    <select class="form-control" id="sel2" name="idlsp">
+                        @foreach (var item in ViewBag.loaiSanPham)
+                        {
+                            <option value="@item.Id">@item.TenLoaiSanPham</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 phan_nut">
+                <input type="submit" class="btn btn-dark btn-block btn-primary" value="Tìm Kiếm" />
+            </div>
+        </form>
+    </div>
+
+</div>
+

@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "KetQuaTimKiem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10 ketquatimkiem text-center">
+            <h2>Kết quả tìm kiếm </h2>
+            @if (ViewBag.count == 0)
+            {
+                <h2>Không có kết quả phù hợp</h2>
+            }
+            else
+            {
+                <div class="row">
+                    <h2>Có <strong>@ViewBag.count </strong>kết quả tìm kiếm</h2>
+                    @foreach (var item in ViewBag.listSanPham)
+                    {
+                        var img = (new BTL_ClientServer.Models.Functions.SanPham()).GetImageByProductId(item.Id)[0].TenAnh;
+                        <div class="col-md-4 sanpham">
+                            <img src="~/Content/User/img/product/@img" alt="" class="img-responsive" />
+                            <br />
+                            <h3 class="text-warning">@item.TenSanPham</h3>
+                            <h4>Giá : @String.Format("Số tiền là: {0:0,00}", item.Gia) VND</h4>
+                            <a class="btn btn-success" href="@Url.Action("Index", "Test")"><span>Thêm Vào Giỏ</span></a>
+                            <a class="btn btn-primary" href="@Url.Action("SingleProduct","Product", new {@id = item.Id})"><span>Xem Chi Tiết</span></a>
+                        </div>
+                    }
+                </div>
+            }
+            <hr />
+
+            <a class="btn btn-dark btn-block text-center" style="background-color:palegoldenrod" href="@Url.Action("Index", "Statistic")"><span>Quay lại</span></a>
+
+        </div>
+        <div class="col-md-1">
+
+        </div>
+    </div>
+</div>
+
+

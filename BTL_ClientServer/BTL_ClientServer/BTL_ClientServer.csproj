@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -358,6 +359,9 @@
     <None Include="packages.config" />
     <Content Include="Views\Home\_Blocks.cshtml" />
     <Content Include="Views\Product\SingleProduct.cshtml" />
+    <Content Include="Views\Statistic\SearchByName.cshtml" />
+    <Content Include="Views\Statistic\ViewTimKiem.cshtml" />
+    <Content Include="Views\Statistic\KetQuaTimKiem.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
