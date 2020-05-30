@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -136,6 +137,7 @@
     <Compile Include="Models\Entity\ChiTietHoaDon.cs" />
     <Compile Include="Models\Entity\DBModel.cs" />
     <Compile Include="Models\Entity\GiamGia.cs" />
+    <Compile Include="Models\Entity\GioHang.cs" />
     <Compile Include="Models\Entity\HoaDon.cs" />
     <Compile Include="Models\Entity\Image.cs" />
     <Compile Include="Models\Entity\KhachHang.cs" />
@@ -358,6 +360,8 @@
     <None Include="packages.config" />
     <Content Include="Views\Home\_Blocks.cshtml" />
     <Content Include="Views\Product\SingleProduct.cshtml" />
+    <Content Include="Views\KhachHang\DangNhap.cshtml" />
+    <Content Include="Views\KhachHang\DangKi.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

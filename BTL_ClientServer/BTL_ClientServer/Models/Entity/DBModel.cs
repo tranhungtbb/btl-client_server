@@ -14,6 +14,7 @@ namespace BTL_ClientServer.Models.Entity
 
         public virtual DbSet<ChiTietHoaDon> ChiTietHoaDons { get; set; }
         public virtual DbSet<GiamGia> GiamGias { get; set; }
+        public virtual DbSet<GioHang> GioHangs { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
@@ -61,6 +62,11 @@ namespace BTL_ClientServer.Models.Entity
                 .IsUnicode(false);
 
             modelBuilder.Entity<KhachHang>()
+                .HasMany(e => e.GioHangs)
+                .WithOptional(e => e.KhachHang)
+                .HasForeignKey(e => e.IdKhachHang);
+
+            modelBuilder.Entity<KhachHang>()
                 .HasMany(e => e.HoaDons)
                 .WithOptional(e => e.KhachHang)
                 .HasForeignKey(e => e.IdKhachHang);
@@ -101,6 +107,11 @@ namespace BTL_ClientServer.Models.Entity
                 .WithRequired(e => e.SanPham)
                 .HasForeignKey(e => e.IdSanPham)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<SanPham>()
+                .HasMany(e => e.GioHangs)
+                .WithOptional(e => e.SanPham)
+                .HasForeignKey(e => e.IdSanPham);
 
             modelBuilder.Entity<SanPham>()
                 .HasMany(e => e.Images)

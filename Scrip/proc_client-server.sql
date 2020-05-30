@@ -68,3 +68,17 @@ values ('6.4.jpg',6),
 ('17.jpg',17),
 ('18.jpg',18),
 ('19.jpg',19)
+
+create table GioHang(
+	Id int identity(1,1) primary key,
+	IdSanPham int,
+	IdKhachHang int,
+	Soluong nvarchar(100),
+	Gia decimal(18,2),
+	GiamGia int,
+	ThanhTien decimal(18,2),
+	foreign key (IdSanPham) references SanPham(Id),
+	foreign key (IdKhachHang) references KhachHang(Id)
+)
+ALTER TABLE KhachHang
+ALTER COLUMN Email varchar(50);

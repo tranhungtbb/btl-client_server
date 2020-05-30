@@ -13,6 +13,7 @@ namespace BTL_ClientServer.Models.Entity
         public SanPham()
         {
             ChiTietHoaDons = new HashSet<ChiTietHoaDon>();
+            GioHangs = new HashSet<GioHang>();
             Images = new HashSet<Image>();
         }
 
@@ -58,8 +59,14 @@ namespace BTL_ClientServer.Models.Entity
 
         public int? IdLoaiSanPham { get; set; }
 
+        [Column(TypeName = "date")]
+        public DateTime? NgayCapNhap { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GioHang> GioHangs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Images { get; set; }

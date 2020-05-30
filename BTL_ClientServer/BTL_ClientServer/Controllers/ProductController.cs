@@ -53,11 +53,18 @@ namespace BTL_ClientServer.Controllers
             Response.Cookies.Add(relatedProducts);
 
             var res = Request.Cookies["relatedProducts"].Values.AllKeys.Select(key => int.Parse(key)).ToList();
-            //HttpCookie userInfo = new HttpCookie("userInfo");
-            //userInfo["Tên người dùng"] = "Annathurai";
-            //userInfo["UserColor"] = "Đen";
-            //userInfo.Expires = DateTime.Now.AddHours(1);
-            //Response.Cookies.Add(userInfo);
+
+            //List<SanPham> list = new List<SanPham>();
+            //SanPham i = db.SanPhams.Where(x=>x.Id==id).SingleOrDefault();
+            //list.Add(i);
+            //var r = String.Join(",", list);
+            //var cookieListSP = new HttpCookie("aaa", r);
+            //cookieListSP.Expires = DateTime.Now.AddDays(1);
+            //Response.Cookies.Add(cookieListSP);
+
+            //List<string> LIST = Request.Cookies["aaa"].Value.Split(',').ToList();
+
+            
             ViewData["relatedProducts"] = db.SanPhams.Where(x => res.Contains(x.Id)).ToList();
 
             return View(model);
