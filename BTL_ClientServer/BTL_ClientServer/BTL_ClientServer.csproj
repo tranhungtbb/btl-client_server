@@ -134,6 +134,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dto\ChiTietThongTin.cs" />
+    <Compile Include="Models\Dto\Detail.cs" />
+    <Compile Include="Models\Dto\KhachHangDto.cs" />
+    <Compile Include="Models\Dto\KhachHangDto1.cs" />
+    <Compile Include="Models\Dto\SanPhamDto.cs" />
     <Compile Include="Models\Entity\ChiTietHoaDon.cs" />
     <Compile Include="Models\Entity\DBModel.cs" />
     <Compile Include="Models\Entity\GiamGia.cs" />
@@ -152,6 +157,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\ThongKe\css\custom.css" />
+    <Content Include="Content\ThongKe\js\custom.js" />
     <Content Include="Content\User\css\bootstrap.min.css" />
     <Content Include="Content\User\css\core.css" />
     <Content Include="Content\User\css\custom.css" />
@@ -362,6 +369,17 @@
     <Content Include="Views\Statistic\SearchByName.cshtml" />
     <Content Include="Views\Statistic\ViewTimKiem.cshtml" />
     <Content Include="Views\Statistic\KetQuaTimKiem.cshtml" />
+    <Content Include="Views\Shared\_Layout_ThongKe.cshtml" />
+    <Content Include="Views\Statistic\Index.cshtml" />
+    <Content Include="Views\Statistic\XemThongTinTheoNgay.cshtml" />
+    <Content Include="Views\Statistic\XemChiTietThongTin.cshtml" />
+    <Content Include="Views\Statistic\TestThongKe.cshtml" />
+    <Content Include="Views\Statistic\XemKhachHangTiemNangTrongThang.cshtml" />
+    <Content Include="Views\Statistic\XemKhachHangTiemNangTrongThangTongTien.cshtml" />
+    <Content Include="Views\Statistic\XemKhachHangTiemNang.cshtml" />
+    <Content Include="Views\Statistic\XemKhachHangTiemNangTT.cshtml" />
+    <Content Include="Views\Statistic\XemSanPhamBanChayTrongThang.cshtml" />
+    <Content Include="Views\Statistic\XemSanPhamKhongBanTrongThang.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

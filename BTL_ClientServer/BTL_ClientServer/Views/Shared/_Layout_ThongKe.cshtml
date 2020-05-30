@@ -1,0 +1,144 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Subas || Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/User/img/icon/favicon.png">
+
+    <!-- All CSS Files -->
+    <!-- Bootstrap fremwork main css -->
+    <link rel="stylesheet" href="~/Content/User/css/bootstrap.min.css">
+    <!-- Nivo-slider css -->
+    <link rel="stylesheet" href="~/Content/User/lib/css/nivo-slider.css">
+    <!-- This core.css file contents all plugings css file. -->
+    <link rel="stylesheet" href="~/Content/User/css/core.css">
+    <!-- Theme shortcodes/elements style -->
+    <link rel="stylesheet" href="~/Content/User/css/shortcode/shortcodes.css">
+    <!-- Theme main style -->
+    <link rel="stylesheet" href="~/Content/User/css/style.css">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="~/Content/User/css/responsive.css">
+
+    <link rel="stylesheet" href="~/Content/ThongKe/css/custom.css">
+    <!-- User style -->
+    <link rel="stylesheet" href="~/Content/User/css/custom.css">
+
+    <!-- Style customizer (Remove these two lines please) -->
+    <link rel="stylesheet" href="~/Content/User/css/style-customizer.css">
+
+
+
+    <!-- Modernizr JS -->
+    <script src="~/Content/User/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+    <!-- Body main wrapper start -->
+    <div class="wrapper">
+        <!-- START HEADER AREA -->
+        @Html.Partial("_Menu")
+        <!-- END HEADER AREA -->
+        <!-- START SLIDER AREA -->
+        @Html.Partial("_Slide")
+        <!-- END SLIDER AREA -->
+        <!-- Start page content -->
+        @*<section id="page-content" class="page-wrapper">
+
+                @RenderBody()
+            </section>*@
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="sidenav">
+                        <button class="dropdown-btn">
+                            <h3>Thống Kê Theo Ngày</h3>
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="text-center">
+                            <form action="/Statistic/XemThongTinTheoNgay">
+                                <h3>Chọn Tháng</h3>
+                                <input type="number" name="thang" id="thang-n" class="form-control" />
+                                <input class="btn btn-block theongay" type="submit" value="Xem Trong Tháng" />
+                            </form>
+                        </div>
+
+                        <button class="dropdown-btn">
+                            <h3>Thống Kê Theo Tháng</h3>
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="text-center">
+                            <form method="get" action="/Statistic/TestThongKe">
+                                <h3>Chọn Tháng</h3>
+                                <input type="number" name="k" id="thang" class="form-control" />
+                                <input class="btn btn-block" type="submit" value="Xem Thống kê">
+                            </form>
+                            <br />
+                            <button class="btn btn-block btn-xem-kh-thang" id="kh1">Theo Số Lượng Hóa Đơn</button>
+                            <button class="btn btn-block btn-xem-khtt-thang" id="kh2">Theo Số Tiền Thanh Toán</button>
+
+                        </div>
+
+                        <button class="dropdown-btn">
+                            <h3>Khách Hàng Tiềm Năng</h3>
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="">
+                            <button class="btn btn-block btn-xem-kh">Theo Số Lượng Hóa Đơn</button>
+                            <button class="btn btn-block btn-xem-khtt">Theo Số Tiền Thanh Toán</button>
+                        </div>
+
+                        <button class="dropdown-btn">
+                            <h3>Sản Phẩm</h3>
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="">
+                            <input type="number" name="s" id="thang-sp" class="form-control" />
+                            <button class="btn btn-block btn-banchay">Sản Phẩm Bán Chạy</button>
+                            <button class="btn btn-block btn-khongban">Sản Phẩm Không Được Bán Trong Tháng</button>
+
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                </div>
+                <div class="col-md-9 benphai">
+                    <div id="result" class="noi-dung">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End page content -->
+        <!-- START FOOTER AREA -->
+        @Html.Partial("_Footer")
+        <!-- END FOOTER AREA -->
+    </div>
+    <!-- Body main wrapper end -->
+    <!-- Placed JS at the end of the document so the pages load faster -->
+    <!-- jquery latest version -->
+    <script src="~/Content/User/js/vendor/jquery-3.1.1.min.js"></script>
+    <!-- Bootstrap framework js -->
+    <script src="~/Content/User/js/bootstrap.min.js"></script>
+    <!-- jquery.nivo.slider js -->
+    <script src="~/Content/User/lib/js/jquery.nivo.slider.js"></script>
+    <!-- All js plugins included in this file. -->
+    <script src="~/Content/User/js/plugins.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <!-- Main js file that contents all jQuery plugins activation. -->
+    <script src="~/Content/ThongKe/js/custom.js"></script>
+
+    <script src="~/Content/User/js/main.js"></script>
+
+
+
+</body>
+
+</html>

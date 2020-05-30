@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "TestThongKe";
+    Layout = "~/Views/Shared/_Layout_ThongKe.cshtml";
+}
+
+<h2 class="text-center tieude">Kết quả Thống kê trong tháng @ViewBag.thang</h2>
+<br />
+
+<ul>
+    @foreach (int city in ViewBag.i)
+    {
+        <li style="visibility:hidden;display:none" class="g" u="@city">
+
+        </li>
+    }
+    @foreach (int c in ViewBag.ii)
+    {
+        <li style="visibility:hidden;display:none" class="h" uu="@c">
+
+        </li>
+    }
+    @foreach (Decimal y in ViewBag.iii)
+    {
+        <li style="visibility:hidden;display:none" class="k" uuu="@y">
+
+        </li>
+    }
+</ul>
+
+<div class="container">
+    <div class="row">
+
+        <h3 id="tt">Tổng Tiền</h3>
+        @*<div class="col-md-2">
+            <a class="btn btn-primary" href="@Url.Action("Index", "Statistic")"><span>Quay lại</span></a>
+        </div>*@
+        <div class="col-md-7 py-1" style="width: 70%">
+
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="chLine"></canvas>
+                </div>
+            </div>
+            <h3 id="n">Ngày</h3>
+        </div>
+        <br />
+        <br />
+        <div id="b" data-options='{"name":"John","name":"bac"}'></div>
+
+        @*<div class="row">
+            <div class="col-md-5 py-1" style="width: 50%">
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="chBar"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    </div>
+</div>
+
+
+
+
+
+

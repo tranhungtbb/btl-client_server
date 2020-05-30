@@ -1,0 +1,172 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+.col-md-9.benphai {
+    background: azure;
+}
+
+.duoi h3 {
+    padding-top: 0px;
+    margin-top: 0px;
+    color: rebeccapurple;
+    text-align: center;
+}
+
+.phan_nut input.btn.btn-block.btn-primary {
+    background: azure;
+    width: 128px;
+}
+
+.sanpham {
+    /* padding-bottom: 9px; */
+    height: 451px;
+    border: 1px solid brown;
+}
+
+.col-md-4.sanpham {
+    /* padding-bottom: 23px; */
+}
+
+.col-md-7 input[type="text"] {
+    border: 1px 1px brown;
+    border: 1px solid #8a6d3bb0;
+    width: 358px;
+    margin-right: 15px;
+}
+
+.sidenav.custom a, .sidenav button {
+    text-align: center;
+    /* color: blue; */
+}
+
+.col-md-7 h2 {
+    font-size: 31px;
+    text-align: center;
+    font-family: fantasy;
+    background: chartreuse;
+    text-shadow: 2px 2px aliceblue;
+}
+
+h2 {
+}
+
+    h2#id-thang {
+        text-align: center;
+        font-size: 27px;
+        color: mediumvioletred;
+        font-family: fantasy;
+        text-shadow: 1px 1px 1px yellow;
+        background: yellowgreen;
+    }
+
+    h2#ketao {
+        color: red;
+        font-family: fantasy;
+        text-shadow: 1px 1px 1px darkblue;
+    }
+
+    h2#ketao {
+    }
+
+h3#n {
+    padding-top: 0;
+    margin-top: -31px;
+}
+
+h2.text-center.tieude {
+    font-size: 30px;
+    font-weight: 800;
+    font-family: monospace;
+    text-shadow: 2px 2px 2px rosybrown;
+    color: lawngreen;
+}
+
+
+.dropdown-btn:hover h3 {
+    color: white;
+}
+
+button.dropdown-btn:hover {
+    color: white;
+}
+
+.dropdown-btn {
+}
+
+.btn-block:hover {
+    font-size: 20px;
+    color: black;
+    cursor: pointer;
+}
+
+.btn-block {
+    background: wheat;
+    color: brown;
+    font-size: 17px;
+}
+
+.sidenav {
+    height: 100%;
+    /* width: 200px; */
+    /* position: fixed; */
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #4fc1f094;
+    overflow-x: hidden;
+    padding-top: 20px;
+    /* padding-bottom: 20px; */
+    text-align: -webkit-right;
+}
+
+    /* Style the sidenav links and the dropdown button */
+    .sidenav a, .dropdown-btn {
+        padding: 6px 8px 20px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #8a6d3b;
+        display: block;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        outline: none;
+        /* text-align: center; */
+    }
+
+        /* On mouse-over */
+        .sidenav a:hover {
+            color: #FF7EFB;
+        }
+
+/* Main content */
+.main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+    font-size: 20px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+    background-color: #00108054;
+    color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+    display: none;
+    background-color: #00803373;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}

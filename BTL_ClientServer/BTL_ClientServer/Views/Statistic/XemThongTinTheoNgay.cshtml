@@ -1,0 +1,43 @@
+﻿@model IEnumerable<BTL_ClientServer.Models.Dto.KhachHangDto>
+@{
+    ViewBag.Title = "XemThongTinTheoNgay";
+    Layout = "~/Views/Shared/_Layout_ThongKe.cshtml";
+}
+<div class="row text-center">
+    <div class="col-md-5 ok" style="overflow:scroll">
+        <h2 id="id-thang" id-thang="@ViewBag.thang">Danh sách khách trong tháng  @ViewBag.thang</h2>
+        <h3>oki la</h3>
+        <table class="table table-dark tb">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Ngày</th>
+                    <th scope="col">Tên Khách Hàng</th>
+                    <th scope="col">Số Lượng Đơn</th>
+                    <th scope="col">Số Lượng Sản Phẩm </th>
+                    <th scope="col">Xem Chi Tiết</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="tr">
+                        <td class="ng" id-ngay="@item.Ngay" id-kh="@item.Id">@item.Ngay</td>
+                        <td><h3>@item.TenKhachHang</h3></td>
+                        <td>@item.SoLuongOrder</td>s
+                        <td>@item.SoLuongSanPham</td>
+                        <td><h3 class="btn btn-block xemchitiet">Xem</h3></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-md-7">
+        <h2>Thông Tin Chi Tiết</h2>
+        <div class="noidungchitiet" id="result1">
+
+        </div>
+    </div>
+</div>
+
