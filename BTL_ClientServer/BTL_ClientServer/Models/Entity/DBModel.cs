@@ -14,6 +14,7 @@ namespace BTL_ClientServer.Models.Entity
 
         public virtual DbSet<ChiTietHoaDon> ChiTietHoaDons { get; set; }
         public virtual DbSet<GiamGia> GiamGias { get; set; }
+        public virtual DbSet<DanhGia> DanhGias { get; set; }
         public virtual DbSet<GioHang> GioHangs { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<Image> Images { get; set; }
@@ -26,6 +27,11 @@ namespace BTL_ClientServer.Models.Entity
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<DanhGia>()
+                .HasMany(e => e.DanhGia1)
+                .WithOptional(e => e.DanhGia2)
+                .HasForeignKey(e => e.IdDanhGia);
+
             modelBuilder.Entity<GiamGia>()
                 .HasMany(e => e.HoaDons)
                 .WithOptional(e => e.GiamGia)

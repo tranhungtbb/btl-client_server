@@ -69,7 +69,40 @@ namespace BTL_ClientServer.Controllers
 
             return View(model);
         }
-        
+
+        [HttpPost]
+        public ActionResult postComment(DanhGia dg)
+        {
+            var idMax = db.DanhGias.Max(x => x.Id);
+            if(idMax == 0)
+            {
+                dg.Id = 1;
+            }
+            dg.Id = idMax + 1;
+            dg.Ngay = DateTime.Now;
+            db.DanhGias.Add(dg);
+            db.SaveChanges();
+            string message = "SUCCESS";
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+        public JsonResult getComment(int idSp)
+        {
+            List<_DanhGia> s = new List<_DanhGia>();
+            s = (from dg in db.DanhGias
+                join kh in db.KhachHangs on dg.IdKhachHang equals kh.Id
+                where dg.IdSanPham == idSp
+                select new _DanhGia
+                {
+                    Id = dg.Id,
+                    TenKhachHang = kh.TenKhachHang,
+                    IdSanPham = dg.IdSanPham,
+                    Ngay = dg.Ngay,
+                    Comment = dg.Comment
+                })
+                .ToList();
+            return Json(s, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }

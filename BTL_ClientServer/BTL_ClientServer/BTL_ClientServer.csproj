@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -135,6 +136,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\ChiTietHoaDon.cs" />
+    <Compile Include="Models\Entity\DanhGia.cs" />
     <Compile Include="Models\Entity\DBModel.cs" />
     <Compile Include="Models\Entity\GiamGia.cs" />
     <Compile Include="Models\Entity\GioHang.cs" />
@@ -146,7 +148,10 @@
     <Compile Include="Models\Entity\QuyenSuDung.cs" />
     <Compile Include="Models\Entity\SanPham.cs" />
     <Compile Include="Models\Entity\ThuongHieu.cs" />
+    <Compile Include="Models\Functions\Acount.cs" />
+    <Compile Include="Models\Functions\GioHang.cs" />
     <Compile Include="Models\Functions\SanPham.cs" />
+    <Compile Include="Models\Objects\_DanhGia.cs" />
     <Compile Include="Models\Objects\_SanPham.cs" />
     <Compile Include="Models\Objects\_SanPhamSinger.cs" />
     <Compile Include="Models\Objects\_ThuongHieu.cs" />
@@ -362,6 +367,9 @@
     <Content Include="Views\Product\SingleProduct.cshtml" />
     <Content Include="Views\KhachHang\DangNhap.cshtml" />
     <Content Include="Views\KhachHang\DangKi.cshtml" />
+    <Content Include="Views\GioHang\Index.cshtml" />
+    <Content Include="Views\GioHang\GioHangSmall.cshtml" />
+    <Content Include="Views\KhachHang\MyAcount.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

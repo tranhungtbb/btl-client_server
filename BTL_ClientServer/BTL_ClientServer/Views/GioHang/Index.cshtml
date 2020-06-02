@@ -1,0 +1,331 @@
+﻿@model IEnumerable<BTL_ClientServer.Models.Entity.GioHang>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="page-content" class="page-wrapper">
+
+    <!-- SHOP SECTION START -->
+    <div class="shop-section mb-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 col-sm-12">
+                    <ul class="cart-tab">
+                        <li>
+                            <a class="active" href="#shopping-cart" data-toggle="tab">
+                                <span>01</span>
+                                Shopping cart
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#checkout" data-toggle="tab">
+                                <span>02</span>
+                                Checkout
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#order-complete" data-toggle="tab">
+                                <span>03</span>
+                                Order complete
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-10 col-sm-12">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <!-- shopping-cart start -->
+                        <div class="tab-pane active" id="shopping-cart">
+                            <div class="shopping-cart-content">
+                                <form action="#">
+                                    <div class="table-content table-responsive mb-50">
+                                        <table class="text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th class="product-thumbnail">product</th>
+                                                    <th class="product-price">price</th>
+                                                    <th class="product-quantity">Quantity</th>
+                                                    <th class="product-subtotal">total</th>
+                                                    <th class="product-remove">action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var i in Model)
+                                                {
+                                                    var img = (new BTL_ClientServer.Models.Functions.SanPham()).GetImageByProductId(i.Id)[0].TenAnh;
+                                                    <!-- tr -->
+                                                <tr>
+                                                    <td class="product-thumbnail">
+                                                        <div class="pro-thumbnail-img">
+                                                            <img src="~/Content/User/img/product/@img" alt="">
+                                                        </div>
+                                                        <div class="pro-thumbnail-info text-left">
+                                                            <h6 class="product-title-2">
+                                                                <a href="#">@i.TenSanPham</a>
+                                                            </h6>
+                                                            <p>Thương hiệu: @i.ThuongHieu</p>
+                                                            <p>%Sale: @i.GiamGia %</p>
+                                                        </div>
+                                                    </td>
+                                                    <td class="product-price">@String.Format("{0:0,0}", i.Gia)</td>
+                                                    @using (Html.BeginForm("UpdateGioHang", "GioHang", new { @idSp = i.IdSanPham }))
+                                                    {
+                                                        <td>@Html.TextBox("txtSoLuong", i.Soluong) </td>
+                                                        <td>
+                                                            @String.Format("{0:0,0}", i.ThanhTien)
+                                                        </td>
+                                                        <td class="product-remove">
+                                                            <a href="@Url.Action("RemoteGioHang", "GioHang",new { @id = i.Id})"><i class="zmdi zmdi-close"></i></a>
+                                                        </td>
+                                                    }
+                                                </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="coupon-discount box-shadow p-30 mb-50">
+                                                <h6 class="widget-title border-left mb-20">coupon discount</h6>
+                                                <p>Enter your coupon code if you have one!</p>
+                                                <input type="text" name="name" placeholder="Enter your code here.">
+                                                <button class="submit-btn-1 black-bg btn-hover-2" type="submit">apply coupon</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="payment-details box-shadow p-30 mb-50">
+                                                <h6 class="widget-title border-left mb-20">payment details</h6>
+                                                <table>
+                                                    <tr>
+                                                        <td class="td-title-1">Cart Subtotal</td>
+                                                        <td class="td-title-2">@String.Format("{0:0,0}", ViewBag._total)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="td-title-1">Shipping and Handing</td>
+                                                        <td class="td-title-2">00.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="td-title-1">Vat</td>
+                                                        <td class="td-title-2">00.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="order-total">Order Total</td>
+                                                        <td class="order-total-price">@String.Format("{0:0,0}", ViewBag._total)</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="culculate-shipping box-shadow p-30">
+                                                <h6 class="widget-title border-left mb-20">culculate shipping</h6>
+                                                <p>Enter your coupon code if you have one!</p>
+                                                <div class="row">
+                                                    <div class="col-sm-4 col-xs-12">
+                                                        <input type="text" placeholder="Country">
+                                                    </div>
+                                                    <div class="col-sm-4 col-xs-12">
+                                                        <input type="text" placeholder="Region / State">
+                                                    </div>
+                                                    <div class="col-sm-4 col-xs-12">
+                                                        <input type="text" placeholder="Post code">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <button class="submit-btn-1 black-bg btn-hover-2">get a quote</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- shopping-cart end -->
+                        <!-- wishlist end -->
+                        <!-- checkout start -->
+                        <div class="tab-pane" id="checkout">
+                            <div class="checkout-content box-shadow p-30">
+                                <form action="#">
+                                    <div class="row">
+                                        <!-- billing details -->
+                                        <div class="col-md-6">
+                                            <div class="billing-details pr-10">
+                                                <h6 class="widget-title border-left mb-20">billing details</h6>
+                                                <input type="text" placeholder="Your Name Here...">
+                                                <input type="text" placeholder="Email address here...">
+                                                <input type="text" placeholder="Phone here...">
+                                                <input type="text" placeholder="Company neme here...">
+                                                <select class="custom-select">
+                                                    <option value="defalt">country</option>
+                                                    <option value="c-1">Australia</option>
+                                                    <option value="c-2">Bangladesh</option>
+                                                    <option value="c-3">Unitd States</option>
+                                                    <option value="c-4">Unitd Kingdom</option>
+                                                </select>
+                                                <select class="custom-select">
+                                                    <option value="defalt">State</option>
+                                                    <option value="c-1">Melbourne</option>
+                                                    <option value="c-2">Dhaka</option>
+                                                    <option value="c-3">New York</option>
+                                                    <option value="c-4">London</option>
+                                                </select>
+                                                <select class="custom-select">
+                                                    <option value="defalt">Town/City</option>
+                                                    <option value="c-1">Victoria</option>
+                                                    <option value="c-2">Chittagong</option>
+                                                    <option value="c-3">Boston</option>
+                                                    <option value="c-4">Cambridge</option>
+                                                </select>
+                                                <textarea class="custom-textarea" placeholder="Your address here..."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <!-- our order -->
+                                            <div class="payment-details pl-10 mb-50">
+                                                <h6 class="widget-title border-left mb-20">our order</h6>
+                                                <table>
+                                                    <tr>
+                                                        <td class="td-title-1">Total</td>
+                                                        <td class="td-title-2">@String.Format("{0:0,0}", ViewBag._total)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="td-title-1">Shipping and Handing</td>
+                                                        <td class="td-title-2">$00.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="td-title-1">Vat</td>
+                                                        <td class="td-title-2">$00.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="order-total">Order Total</td>
+                                                        <td class="order-total-price">@String.Format("{0:0,0}", ViewBag._total)</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <!-- payment-method -->
+                                            <div class="payment-method">
+                                                <h6 class="widget-title border-left mb-20">payment method</h6>
+
+                                            </div>
+                                            <!-- payment-method end -->
+                                            <a href="/GioHang/DatHang">
+                                                <input class="submit-btn-1 mt-30 btn-hover-1" type="button">Đặt Hàng>
+                                            </a>
+                                            <h6>@ViewBag._success</h6>
+                                            
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- checkout end -->
+                        <!-- order-complete start -->
+                        <div class="tab-pane" id="order-complete">
+                            <div class="order-complete-content box-shadow">
+                                <div class="thank-you p-30 text-center">
+                                    <h6 class="text-black-5 mb-0">Thank you. Your order has been received.</h6>
+                                </div>
+                                <div class="order-info p-30 mb-10">
+                                    <ul class="order-info-list">
+                                        <li>
+                                            <h6>order no</h6>
+                                            <p>m 2653257</p>
+                                        </li>
+                                        <li>
+                                            <h6>order no</h6>
+                                            <p>m 2653257</p>
+                                        </li>
+                                        <li>
+                                            <h6>order no</h6>
+                                            <p>m 2653257</p>
+                                        </li>
+                                        <li>
+                                            <h6>order no</h6>
+                                            <p>m 2653257</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="row">
+                                    <!-- our order -->
+                                    <div class="col-md-6">
+                                        <div class="payment-details p-30">
+                                            <h6 class="widget-title border-left mb-20">Giao dịch mới nhất</h6>
+                                            <table>
+                                                <tr>
+                                                    <td class="td-title-1">Dummy Product Name x 2</td>
+                                                    <td class="td-title-2">$1855.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="td-title-1">Dummy Product Name</td>
+                                                    <td class="td-title-2">$555.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="td-title-1">Cart Subtotal</td>
+                                                    <td class="td-title-2">$2410.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="td-title-1">Shipping and Handing</td>
+                                                    <td class="td-title-2">$15.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="td-title-1">Vat</td>
+                                                    <td class="td-title-2">$00.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="order-total">Order Total</td>
+                                                    <td class="order-total-price">$2425.00</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="bill-details p-30">
+                                            <h6 class="widget-title border-left mb-20">billing details</h6>
+                                            <ul class="bill-address">
+                                                <li>
+                                                    <span>Address:</span>
+                                                    28 Green Tower, Street Name, New York City, USA
+                                                </li>
+                                                <li>
+                                                    <span>email:</span>
+                                                    info@companyname.com
+                                                </li>
+                                                <li>
+                                                    <span>phone : </span>
+                                                    (+880) 19453 821758
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="bill-details pl-30">
+                                            <h6 class="widget-title border-left mb-20">billing details</h6>
+                                            <ul class="bill-address">
+                                                <li>
+                                                    <span>Address:</span>
+                                                    28 Green Tower, Street Name, New York City, USA
+                                                </li>
+                                                <li>
+                                                    <span>email:</span>
+                                                    info@companyname.com
+                                                </li>
+                                                <li>
+                                                    <span>phone : </span>
+                                                    (+880) 19453 821758
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- order-complete end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- SHOP SECTION END -->
+
+</section>
+

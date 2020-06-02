@@ -32,7 +32,11 @@ namespace BTL_ClientServer.Controllers
             return Redirect("/Home/Index");
         }
 
-
+        public ActionResult DangXuat()
+        {
+            Response.Cookies["userInfo"].Expires = DateTime.Now.AddDays(-1);
+            return Redirect("/KhachHang/DangNhap");
+        }
 
 
 
@@ -42,7 +46,7 @@ namespace BTL_ClientServer.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult DangNhap(FormCollection f,string URL)
+        public ActionResult DangNhap(FormCollection f)
         {
             string email = f.Get("email").ToString();
             string matkhau = f.Get("password").ToString();
@@ -63,10 +67,9 @@ namespace BTL_ClientServer.Controllers
             ViewData["ErrDangNhap"] = err;
 
             HttpCookie userInfo = new HttpCookie("userInfo");
-            userInfo["UserId"] = kh.Id.ToString();
-            userInfo.Expires = DateTime.Now.AddHours(1);
+            userInfo.Value = kh.Id.ToString();
+            userInfo.Expires = DateTime.Now.AddDays(30);
             Response.Cookies.Add(userInfo);
-
             return Redirect("/Home/Index");
         }
 

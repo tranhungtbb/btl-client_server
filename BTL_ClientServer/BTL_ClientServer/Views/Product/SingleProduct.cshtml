@@ -22,7 +22,7 @@
                             <div class="row">
                                 <!-- imgs-zoom-area start -->
                                 <div class="col-md-5 col-sm-5 col-xs-12">
-                                   <div class="imgs-zoom-area">
+                                    <div class="imgs-zoom-area">
                                         <img id="zoom_03" src="~/Content/User/img/product/@listImage[0].TenAnh" data-zoom-image="/Content/User/img/product/@listImage[0].TenAnh" alt="">
                                         <div class="row">
                                             <div class="col-xs-12">
@@ -107,7 +107,7 @@
                                         <!--  hr -->
                                         <hr>
                                         <div>
-                                            <a href="#" class="button extra-small button-black" tabindex="-1">
+                                            <a href="/GioHang/Index" class="button extra-small button-black" tabindex="-1">
                                                 <span class="text-uppercase">Buy now</span>
                                             </a>
                                         </div>
@@ -146,50 +146,13 @@
                                             </div>
                                             <div role="tabpanel" class="tab-pane" id="reviews">
                                                 <!-- reviews-tab-desc -->
+                                                <form>
+                                                    <textarea class="custom-textarea" placeholder="Your address here..."></textarea>
+                                                    <button class="submit-btn-1 mt-30 btn-hover-1" type="submit">place order</button>
+                                                </form>
                                                 <div class="reviews-tab-desc">
-                                                    <!-- single comments -->
-                                                    <div class="media mt-30">
-                                                        <div class="media-left">
-                                                            <a href="#"><img class="media-object" src="~/Content/User/img/author/1.jpg" alt="#"></a>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <div class="clearfix">
-                                                                <div class="name-commenter pull-left">
-                                                                    <h6 class="media-heading"><a href="#">Gerald Barnes</a></h6>
-                                                                    <p class="mb-10">27 Jun, 2017 at 2:30pm</p>
-                                                                </div>
-                                                                <div class="pull-right">
-                                                                    <ul class="reply-delate">
-                                                                        <li><a href="#">Reply</a></li>
-                                                                        <li>/</li>
-                                                                        <li><a href="#">Delate</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas .</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- single comments -->
-                                                    <div class="media mt-30">
-                                                        <div class="media-left">
-                                                            <a href="#"><img class="media-object" src="~/Content/User/img/author/2.jpg" alt="#"></a>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <div class="clearfix">
-                                                                <div class="name-commenter pull-left">
-                                                                    <h6 class="media-heading"><a href="#">Gerald Barnes</a></h6>
-                                                                    <p class="mb-10">27 Jun, 2017 at 2:30pm</p>
-                                                                </div>
-                                                                <div class="pull-right">
-                                                                    <ul class="reply-delate">
-                                                                        <li><a href="#">Reply</a></li>
-                                                                        <li>/</li>
-                                                                        <li><a href="#">Delate</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas .</p>
-                                                        </div>
+                                                    <div id="#loadcomment">
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -416,5 +379,59 @@
 
 
 </div>
+@section Scripts
+    {
+    <script type="text/javascript">
+        $(function () {
+            LoadData();
+            $("#btnSave").click(function () {
+                
+            });
+        });
+
+        function LoadData() {
+            $("#loadcomment").remove();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("getComment", new { @idSp = Model.Id})',
+                dataType: 'json',
+                data: { id: '' },
+                success: function (data) {
+                    var items = '';
+                    $.each(data, function (i, item) {
+                        var rows = "<p>" + item.Ngay + "</p>";
+                            //"<div class='media mt-30'>"+
+                            //    "<div class='media-left'>"+
+                            //        "<a href='#'><img class='media-object' src='~/Content/User/img/author/2.jpg' alt='#'></a>"+
+                            //    "</div>"+
+                            //    "<div class='media-body'>"+
+                            //        "<div class='clearfix'>"+
+                            //            "<div class='name-commenter pull-left'>" +
+                            //                "<h6 class='media-heading'><a href='#'>" + item.TenKhachHang + "</a></h6>" +
+                            //                "<p class='mb-10'>" + item.Ngay + "</p>"+
+                            //            "</div>"+
+                            //            "<div class='pull-right'>"+
+                            //                "<ul class='reply-delate'>"+
+                            //                    "<li><a href='#'>Delate</a></li>"+
+                            //                "</ul>"+
+                            //            "</div>"+
+                            //        "</div>" +
+                            //        "<p class='mb-0'>" + item.Comment + "</p>" +
+                            //    "</div>"+
+                            //"</div>";
+                        $('#loadcomment').append(rows);
+                    });
+                },
+                error: function (ex) {
+                    var r = jQuery.parseJSON(response.responseText);
+                    alert("Message: " + r.Message);
+                    alert("StackTrace: " + r.StackTrace);
+                    alert("ExceptionType: " + r.ExceptionType);
+                }
+            });
+            return false;
+        }
+    </script>
+}
 
 

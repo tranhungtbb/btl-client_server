@@ -15,14 +15,21 @@ namespace BTL_ClientServer.Models.Entity
 
         public int? IdKhachHang { get; set; }
 
-        [StringLength(100)]
-        public string Soluong { get; set; }
+        public string TenSanPham { get; set; }
+
+        public string ThuongHieu { get; set; }
+
+        public int Soluong { get; set; }
 
         public decimal? Gia { get; set; }
 
         public int? GiamGia { get; set; }
 
-        public decimal? ThanhTien { get; set; }
+        public decimal? ThanhTien {
+            get {
+                return Soluong * Gia * (100 - GiamGia) / 100;
+            }
+        }
 
         public virtual KhachHang KhachHang { get; set; }
 

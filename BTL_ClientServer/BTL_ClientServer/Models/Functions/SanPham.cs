@@ -50,7 +50,7 @@ namespace BTL_ClientServer.Models.Functions
             return a;
         }
 
-        public List<Image> GetImageByProductId(int id)
+        public List<Image> GetImageByProductId(int? id)
         {
             List<Image> a = null;
             a = (from img in db.Images

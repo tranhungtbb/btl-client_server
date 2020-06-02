@@ -34,7 +34,7 @@
     <script src="~/Content/User/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
-<body>
+<body onload="isLogin()">
     <!-- Body main wrapper start -->
     <div class="wrapper">
         <!-- START HEADER AREA -->
@@ -45,11 +45,9 @@
         <!-- END SLIDER AREA -->
         <!-- Start page content -->
         <section id="page-content" class="page-wrapper">
-            
             @RenderBody()
         </section>
         <!-- End page content -->
-
         <!-- START FOOTER AREA -->
         @Html.Partial("_Footer")
         <!-- END FOOTER AREA -->
@@ -66,7 +64,19 @@
     <script src="~/Content/User/js/plugins.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="~/Content/User/js/main.js"></script>
-
+    <script>
+        function isLogin() {
+            var user = $.cookie("userInfo");
+            if (user != null) {
+                document.getElementById("li_dangnhap").setAttribute("style", "display: none");
+                document.getElementById("li_dangxuat").setAttribute("style", "display: block");
+            } else {
+                document.getElementById("li_dangxuat").setAttribute("style", "display: none");
+                document.getElementById("li_dangnhap").setAttribute("style", "display: block");
+            }
+        }
+    </script>
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>

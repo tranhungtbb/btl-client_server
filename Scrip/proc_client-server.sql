@@ -1,4 +1,4 @@
---alter table SanPham
+﻿--alter table SanPham
 --add NgayCapNhap date
 
 
@@ -82,3 +82,36 @@ create table GioHang(
 )
 ALTER TABLE KhachHang
 ALTER COLUMN Email varchar(50);
+ALTER TABLE GioHang
+ALTER COLUMN Soluong int;
+
+ALTER TABLE GioHang
+add TenSanPham nvarchar(50),
+	ThuongHieu nvarchar(50)
+
+-- trigger table giỏ hàng
+
+create or alter trigger Insert_Update_GioHang on GioHang for insert,update
+as
+begin
+	declare @idKhachHang int, @idSanPham int, @Sl int
+	select @idKhachHang = IdKhachHang, @idSanPham = IdSanPham , @Sl = Soluong from inserted
+	update GioHang
+		set TenSanPham = (select TenSanPham from SanPham where Id = @idSanPham),
+			ThuongHieu = (select TenThuongHieu from ThuongHieu th , SanPham sp where th.Id = sp.IdThuongHieu and sp.Id = @idSanPham),
+			Gia = (select Gia from SanPham where Id = @idSanPham),
+			GiamGia = (select GiamGia from SanPham where Id = @idSanPham)
+		where IdKhachHang = @idKhachHang and IdSanPham = @idSanPham
+end
+
+create table DanhGia(
+	Id int identity(1,1) primary key,
+	IdSanPham int,
+	IdKhachHang int,
+	IdDanhGia int,
+	Comment nvarchar(max),
+	Ngay date,
+	foreign key (IdSanPham) references SanPham(Id),
+	foreign key (IdKhachHang) references KhachHang(Id),
+	foreign key (IdDanhGia) references DanhGia(Id)
+)
