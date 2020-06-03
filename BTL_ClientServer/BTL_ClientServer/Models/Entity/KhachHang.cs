@@ -12,9 +12,11 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public KhachHang()
         {
+            DanhGias = new HashSet<DanhGia>();
             GioHangs = new HashSet<GioHang>();
             HoaDons = new HashSet<HoaDon>();
         }
+
         [Key]
         public int Id { get; set; }
 
@@ -59,6 +61,9 @@
         [Display(Name = "Email")]
         [Required(ErrorMessage = "{0} không được để trống!")]
         public string Email { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DanhGia> DanhGias { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GioHang> GioHangs { get; set; }

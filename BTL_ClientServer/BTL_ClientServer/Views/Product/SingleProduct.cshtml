@@ -146,13 +146,10 @@
                                             </div>
                                             <div role="tabpanel" class="tab-pane" id="reviews">
                                                 <!-- reviews-tab-desc -->
-                                                <form>
-                                                    <textarea class="custom-textarea" placeholder="Your address here..."></textarea>
-                                                    <button class="submit-btn-1 mt-30 btn-hover-1" type="submit">place order</button>
-                                                </form>
-                                                <div class="reviews-tab-desc">
-                                                    <div id="#loadcomment">
-
+                                                <textarea class="custom-textarea" id="textComment" placeholder="Your address here..."></textarea>
+                                                <button class="submit-btn-1 mt-30 btn-hover-1" type="submit" id="btnSave">place order</button>
+                                                <div class="reviews-tab-desc" style="margin-top: 20px;">
+                                                    <div id="loadcomment">
                                                     </div>
                                                 </div>
                                             </div>
@@ -297,7 +294,7 @@
                             <div class="product-item">
                                 <div class="product-img">
                                     <a href="single-product.html">
-                                        <img src="img/product/4.jpg" alt="" />
+                                        <img src="~/Content/User/img/product/4.jpg" alt="" />
                                     </a>
                                 </div>
                                 <div class="product-info">
@@ -312,7 +309,7 @@
                             <div class="product-item">
                                 <div class="product-img">
                                     <a href="single-product.html">
-                                        <img src="img/product/4.jpg" alt="" />
+                                        <img src="~/Content/User/img/product/4.jpg" alt="" />
                                     </a>
                                 </div>
                                 <div class="product-info">
@@ -327,7 +324,7 @@
                             <div class="product-item">
                                 <div class="product-img">
                                     <a href="single-product.html">
-                                        <img src="img/product/4.jpg" alt="" />
+                                        <img src="~/Content/User/img/product/4.jpg" alt="" />
                                     </a>
                                 </div>
                                 <div class="product-info">
@@ -342,7 +339,7 @@
                             <div class="product-item">
                                 <div class="product-img">
                                     <a href="single-product.html">
-                                        <img src="img/product/8.jpg" alt="" />
+                                        <img src="~/Content/User/img/product/8.jpg" alt="" />
                                     </a>
                                 </div>
                                 <div class="product-info">
@@ -357,7 +354,7 @@
                             <div class="product-item">
                                 <div class="product-img">
                                     <a href="single-product.html">
-                                        <img src="img/product/12.jpg" alt="" />
+                                        <img src="~/Content/User/img/product/12.jpg" alt="" />
                                     </a>
                                 </div>
                                 <div class="product-info">
@@ -385,42 +382,58 @@
         $(function () {
             LoadData();
             $("#btnSave").click(function () {
+                var s = {};
+                s.Comment = $("#textComment").val();
+                s.IdSanPham = @Model.Id;
+                $.ajax({
+                    type: "POST",
+                    url: '/Product/postComment',
+                    dataType: "json",
+                    data: '{dg: ' + JSON.stringify(s) + '}',
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        $("#textComment").empty();
+                        LoadData();
+                    },
+                    error: function () {
+                        alert("Bạn chưa đăng nhập! Vui lòng đăng nhập để comment!");
+                    }
+                });
                 
-            });
-        });
+            })
+        })
 
         function LoadData() {
-            $("#loadcomment").remove();
+            $("#loadcomment").empty();
             $.ajax({
-                type: 'POST',
-                url: '@Url.Action("getComment", new { @idSp = Model.Id})',
-                dataType: 'json',
-                data: { id: '' },
+                url: '/Product/getComment?idSp='+@Model.Id,
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
                 success: function (data) {
-                    var items = '';
-                    $.each(data, function (i, item) {
-                        var rows = "<p>" + item.Ngay + "</p>";
-                            //"<div class='media mt-30'>"+
-                            //    "<div class='media-left'>"+
-                            //        "<a href='#'><img class='media-object' src='~/Content/User/img/author/2.jpg' alt='#'></a>"+
-                            //    "</div>"+
-                            //    "<div class='media-body'>"+
-                            //        "<div class='clearfix'>"+
-                            //            "<div class='name-commenter pull-left'>" +
-                            //                "<h6 class='media-heading'><a href='#'>" + item.TenKhachHang + "</a></h6>" +
-                            //                "<p class='mb-10'>" + item.Ngay + "</p>"+
-                            //            "</div>"+
-                            //            "<div class='pull-right'>"+
-                            //                "<ul class='reply-delate'>"+
-                            //                    "<li><a href='#'>Delate</a></li>"+
-                            //                "</ul>"+
-                            //            "</div>"+
-                            //        "</div>" +
-                            //        "<p class='mb-0'>" + item.Comment + "</p>" +
-                            //    "</div>"+
-                            //"</div>";
-                        $('#loadcomment').append(rows);
-                    });
+                    $.each(data, function (key, item) {
+                        var row = "<div class='media mt-30'>"+
+                                      "<div class='media-left'>"+
+                                            "<a href='#'><img class='media-object' src='/Content/User/img/author/2.jpg' alt='#'></a>"+
+                                        "</div>"+
+                                        "<div class='media-body'>"+
+                                            "<div class='clearfix'>"+
+                                                "<div class='name-commenter pull-left'>" +
+                                                    "<h6 class='media-heading'><a href='#'>" + item.TenKhachHang + "</a></h6>" +
+                                                    "<p class='mb-10'>" + item.Ngay + "</p>"+
+                                                "</div>"+
+                                                "<div class='pull-right'>"+
+                                                    "<ul class='reply-delate'>"+
+                                                        "<li><a href='#'>Trả lời</a></li>"+
+                                                    "</ul>"+
+                                                "</div>"+
+                                            "</div>" +
+                                            "<p class='mb-0'>" + item.Comment + "</p>" +
+                                        "</div>"+
+                                     "</div>";
+                        $("#loadcomment").append(row);
+                    })
+                    
                 },
                 error: function (ex) {
                     var r = jQuery.parseJSON(response.responseText);

@@ -108,10 +108,8 @@ create table DanhGia(
 	Id int identity(1,1) primary key,
 	IdSanPham int,
 	IdKhachHang int,
-	IdDanhGia int,
 	Comment nvarchar(max),
 	Ngay date,
 	foreign key (IdSanPham) references SanPham(Id),
-	foreign key (IdKhachHang) references KhachHang(Id),
-	foreign key (IdDanhGia) references DanhGia(Id)
+	foreign key (IdKhachHang) references KhachHang(Id)
 )
