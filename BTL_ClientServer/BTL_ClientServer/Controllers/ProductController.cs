@@ -41,7 +41,7 @@ namespace BTL_ClientServer.Controllers
                              TenThuongHieu = th.TenThuongHieu,
                              ThongTinThuongHieu = th.ThongTinThuongHieu,
                              MoTaThuongHieu = th.MoTa
-                            }).SingleOrDefault();
+                         }).SingleOrDefault();
 
             var relatedProducts = Request.Cookies["relatedProducts"];
             if (relatedProducts == null)
@@ -64,27 +64,39 @@ namespace BTL_ClientServer.Controllers
 
             //List<string> LIST = Request.Cookies["aaa"].Value.Split(',').ToList();
 
-            
+
             ViewData["relatedProducts"] = db.SanPhams.Where(x => res.Contains(x.Id)).ToList();
 
             return View(model);
         }
-
         [HttpPost]
         public ActionResult postComment(DanhGia dg)
         {
-            var idMax = db.DanhGias.Max(x => x.Id);
-            if(idMax == 0)
+            var cookiesUser = Request.Cookies["userInfo"];
+            if(cookiesUser == null)
             {
-                dg.Id = 1;
+                return Redirect("KhachHang/DangNhap");
             }
-            dg.Id = idMax + 1;
-            dg.Ngay = DateTime.Now;
-            db.DanhGias.Add(dg);
-            db.SaveChanges();
-            string message = "SUCCESS";
-            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+            else
+            {
+                var idMax = db.DanhGias.Max(x => x.Id);
+                if (idMax == 0)
+                {
+                    dg.Id = 1;
+                }
+                dg.Id = idMax + 1;
+                dg.IdKhachHang = Convert.ToInt16(cookiesUser.Value);
+                dg.Ngay = DateTime.Now;
+                db.DanhGias.Add(dg);
+                db.SaveChanges();
+                string message = "SUCCESS";
+                return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+            }
+            
+            
         }
+
+        
         public JsonResult getComment(int idSp)
         {
             List<_DanhGia> s = new List<_DanhGia>();
@@ -96,7 +108,7 @@ namespace BTL_ClientServer.Controllers
                     Id = dg.Id,
                     TenKhachHang = kh.TenKhachHang,
                     IdSanPham = dg.IdSanPham,
-                    Ngay = dg.Ngay,
+                    Ngay = dg.Ngay.ToString(),
                     Comment = dg.Comment
                 })
                 .ToList();

@@ -72,9 +72,7 @@
                                                     @using (Html.BeginForm("UpdateGioHang", "GioHang", new { @idSp = i.IdSanPham }))
                                                     {
                                                         <td>@Html.TextBox("txtSoLuong", i.Soluong) </td>
-                                                        <td>
-                                                            @String.Format("{0:0,0}", i.ThanhTien)
-                                                        </td>
+                                                        <td>@String.Format("{0:0,0}", i.ThanhTien) </td>
                                                         <td class="product-remove">
                                                             <a href="@Url.Action("RemoteGioHang", "GioHang",new { @id = i.Id})"><i class="zmdi zmdi-close"></i></a>
                                                         </td>

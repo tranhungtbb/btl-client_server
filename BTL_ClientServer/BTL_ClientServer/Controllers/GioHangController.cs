@@ -160,7 +160,7 @@ namespace BTL_ClientServer.Controllers
             List<GioHang> listGioHang = LayGioHang();
             for(var i =0; i< listGioHang.Count; i++)
             {
-                res += listGioHang[i].ThanhTien;
+                res += (listGioHang[i].ThanhTien);
             }
 
             return res;

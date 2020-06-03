@@ -13,6 +13,7 @@ namespace BTL_ClientServer.Models.Entity
         public SanPham()
         {
             ChiTietHoaDons = new HashSet<ChiTietHoaDon>();
+            DanhGias = new HashSet<DanhGia>();
             GioHangs = new HashSet<GioHang>();
             Images = new HashSet<Image>();
         }
@@ -64,6 +65,9 @@ namespace BTL_ClientServer.Models.Entity
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DanhGia> DanhGias { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GioHang> GioHangs { get; set; }

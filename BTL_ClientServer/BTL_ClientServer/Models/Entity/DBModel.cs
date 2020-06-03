@@ -13,8 +13,8 @@ namespace BTL_ClientServer.Models.Entity
         }
 
         public virtual DbSet<ChiTietHoaDon> ChiTietHoaDons { get; set; }
-        public virtual DbSet<GiamGia> GiamGias { get; set; }
         public virtual DbSet<DanhGia> DanhGias { get; set; }
+        public virtual DbSet<GiamGia> GiamGias { get; set; }
         public virtual DbSet<GioHang> GioHangs { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<Image> Images { get; set; }
@@ -27,11 +27,6 @@ namespace BTL_ClientServer.Models.Entity
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<DanhGia>()
-                .HasMany(e => e.DanhGia1)
-                .WithOptional(e => e.DanhGia2)
-                .HasForeignKey(e => e.IdDanhGia);
-
             modelBuilder.Entity<GiamGia>()
                 .HasMany(e => e.HoaDons)
                 .WithOptional(e => e.GiamGia)
@@ -66,6 +61,11 @@ namespace BTL_ClientServer.Models.Entity
             modelBuilder.Entity<KhachHang>()
                 .Property(e => e.Email)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<KhachHang>()
+                .HasMany(e => e.DanhGias)
+                .WithOptional(e => e.KhachHang)
+                .HasForeignKey(e => e.IdKhachHang);
 
             modelBuilder.Entity<KhachHang>()
                 .HasMany(e => e.GioHangs)
@@ -113,6 +113,11 @@ namespace BTL_ClientServer.Models.Entity
                 .WithRequired(e => e.SanPham)
                 .HasForeignKey(e => e.IdSanPham)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<SanPham>()
+                .HasMany(e => e.DanhGias)
+                .WithOptional(e => e.SanPham)
+                .HasForeignKey(e => e.IdSanPham);
 
             modelBuilder.Entity<SanPham>()
                 .HasMany(e => e.GioHangs)

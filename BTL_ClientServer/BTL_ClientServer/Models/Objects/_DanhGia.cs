@@ -19,6 +19,6 @@ namespace BTL_ClientServer.Models.Objects
 
         public string Comment { get; set; }
         
-        public DateTime? Ngay { get; set; }
+        public string Ngay { get; set; }
     }
 }
