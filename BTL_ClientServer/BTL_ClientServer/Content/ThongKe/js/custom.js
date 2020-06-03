@@ -14,27 +14,16 @@
     });
     var colors = ['red', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
 
-    /* large line chart */
     var chLine = document.getElementById("chLine");
-    var chartData = {
-        //  labels: ["S", "M", "T", "W", "T", "F", "S"],
+    var chartData = {  
         labels: a,
         datasets: [{
-            // data: [589, 445, 483, 900, 689, 692, 634,54,656,55,65,323,554,233,88,434,455],
-            // data: [14000000, 0, 0, 0, 0, 20000000, 30000000, 0, 12000000, 50000000],
             data: aa,
             backgroundColor: 'transparent',
             borderColor: colors[0],
             borderWidth: 4,
             pointBackgroundColor: colors[0]
         }
-            //   {
-            //     data: [639, 465, 493, 478, 589, 632, 674],
-            //     backgroundColor: colors[3],
-            //     borderColor: colors[1],
-            //     borderWidth: 4,
-            //     pointBackgroundColor: colors[1]
-            //   }
         ]
     };
     if (chLine) {
@@ -57,35 +46,38 @@
         });
     }
 
-    var chBar = document.getElementById("chBar");
-    if (chBar) {
-        new Chart(chBar, {
-            type: 'bar',
-            data: {
-                labels: a,
-                datasets: [{
-                    data: aaa,
-                    backgroundColor: colors[0]
-                },
-                {
-                    data: aaa,
-                    backgroundColor: colors[1]
-                }]
-            },
+    var chLine1 = document.getElementById("chLine1");
+    var chartData = {
+        labels: a,
+        datasets: [{
+            data: aaa,
+            backgroundColor: 'transparent',
+            borderColor: colors[1],
+            borderWidth: 4,
+            pointBackgroundColor: colors[1]
+        }
+        ]
+    };
+    if (chLine1) {
+        new Chart(chLine1, {
+            type: 'line',
+            data: chartData,
             options: {
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                },
                 legend: {
                     display: false
                 },
-                scales: {
-                    xAxes: [{
-                        barPercentage: 0.4,
-                        categoryPercentage: 0.5
-                    }]
-                }
+                responsive: true
             }
         });
     }
-
+  
     $('button.nut-tim-kiem').click(function () {
         var search = $('#search').val();
         alert(search);
@@ -102,6 +94,10 @@
     });
 
     $("table.tb tr.tr").click(function () {
+        $('table.tb tr').removeClass('active');
+         
+        $(this).addClass('active');
+       
         var thang = $("h2#id-thang").attr("id-thang");
         var ngay = $(this).find('td').attr('id-ngay');
         var idKhachHang = $(this).find('td').attr('id-kh');
@@ -109,6 +105,7 @@
             url: '/Statistic/XemChiTietThongTin',
             type: "get",
             data: {
+                page: 1,
                 thang: thang,
                 day: ngay,
                 idKhachHang: idKhachHang
@@ -171,25 +168,39 @@
     });
 
     //phần snar phẩm
-    $('button.btn-banchay').click(function () {
+    $('button.btn.btn-banchay').click(function () {
         var input = $("input#thang-sp").val();
+        if (input == null) {
+            alert("Mời bạn nhập tháng");
+        }
         $.ajax({
             url: '/Statistic/XemSanPhamBanChayTrongThang',
             type: "get",
-            data: { thang: input },
+            data: {
+                page: 1,
+                thang: input
+            },
             success: function (res) {
-                $('div#result').empty();
-                $('div#result').html(res);
+                $('body').empty();
+                $('body').html(res);
             }
         });
+        console.log("xong");
 
     });
-    $('button.btn-khongban').click(function () {
+    $('button.btn.btn-khongban').click(function () {
+        
         var input = $("input#thang-sp").val();
+        if (input == null) {
+            alert("Mời bạn nhập tháng");
+        }
         $.ajax({
             url: '/Statistic/XemSanPhamKhongBanTrongThang',
             type: "get",
-            data: { thang: input },
+            data: {
+                page: 1,
+                thang: input
+            },
             success: function (res) {
                 $('div#result').empty();
                 $('div#result').html(res);

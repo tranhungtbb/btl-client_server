@@ -1,5 +1,6 @@
 ﻿using BTL_ClientServer.Models.Dto;
 using BTL_ClientServer.Models.Entity;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -106,17 +107,20 @@ namespace BTL_ClientServer.Controllers
             return View();
         }
 
-
         //laays danh sachs theo ngay
         [HttpGet]
-        public ActionResult XemThongTinTheoNgay(int thang)
+        public ActionResult XemThongTinTheoNgay(int? page,int thang)
         {
+          
             var kh = db.Database.SqlQuery<KhachHangDto>("select DATEPART(DAY,NgayTao) as Ngay,Id, MaKhachHang, TenKhachHang,count(ns.MaSanPham) as SoLuongOrder" +
                 ",sum(ns.SoLuong) as SoLuongSanPham from NguoiDung_SanPham ns where DATEPART(MONTH, NgayTao) = " + thang + " group by ns.NgayTao, Id, MaKhachHang, TenKhachHang").ToList();
             var listOrderBySoLuong = kh.OrderBy(n => n.Ngay).ToList();
             kh.ForEach(e => { System.Diagnostics.Debug.WriteLine(e.TenKhachHang); });
             ViewBag.thang = thang;
-            return View(listOrderBySoLuong);
+            int pageSize = 5;
+            int pageNumber = page ??1;
+            //return View(students.ToPagedList(pageNumber, pageSize));
+            return View(listOrderBySoLuong.ToPagedList(pageNumber, pageSize));
         }
 
         [HttpGet]
@@ -125,27 +129,24 @@ namespace BTL_ClientServer.Controllers
             SqlParameter[] para =
             {
                 new SqlParameter("@thang",System.Data.SqlDbType.VarChar,50){Value= thang.ToString()},
-                 new SqlParameter("@day",System.Data.SqlDbType.VarChar,50){Value= day.ToString()},
-                  new SqlParameter("@idKhachHang",System.Data.SqlDbType.VarChar,50){Value= idKhachHang.ToString()},
+                new SqlParameter("@day",System.Data.SqlDbType.VarChar,50){Value= day.ToString()},
+                new SqlParameter("@idKhachHang",System.Data.SqlDbType.VarChar,50){Value= idKhachHang.ToString()},
 
             };
             //var pId = new SqlParameter[] { ParameterName = "thang", Value = thang ; };
 
             string query = "EXEC XemThongKeChiTietKhachHang @thang, @day, @idKhachHang";
-            var kq = db.Database.SqlQuery<ChiTietThongTin>(query, para).ToList();
-            System.Diagnostics.Debug.WriteLine("thang = ", thang);
-            foreach (ChiTietThongTin k in kq)
-            {
-                System.Diagnostics.Debug.WriteLine(k.TenSanPham);
-            }
-            return PartialView(kq.OrderBy(n => n.MaSanPham).ToList());
+            var kq = db.Database.SqlQuery<ChiTietThongTin>(query, para).OrderBy(n=>n.MaSanPham);
+            
+            return PartialView(kq.ToList());
         }
 
         //chức năng vẽ biểu đồ thống kê
         //thống kê theo tiền thu nhập theo ngày và số lượng order theo ngày
         public ActionResult TestThongKe(int k)
         {
-            System.Diagnostics.Debug.WriteLine("test thống kê , k =" + k);
+            int days = DateTime.DaysInMonth(2020, k);
+            System.Diagnostics.Debug.WriteLine("số ngày trong tháng là = ", days);
             Detail detail = new Detail();
             var doituongmoi = db.HoaDons.Where(m => m.NgayTao.Value.Month == k)
                                         .GroupBy(a => a.NgayTao.Value.Day)
@@ -155,34 +156,24 @@ namespace BTL_ClientServer.Controllers
                                         .OrderBy(c => c.day).ToList();
 
 
-            int[] dayOfMonth = new int[31];
-            decimal[] valueOrderMonth = new decimal[31];
-            int[] countOfMonth = new int[31];
-            for (int i = 1; i < 31; i++)
+            int[] dayOfMonth = new int[days];
+            decimal[] valueOrderMonth = new decimal[days];
+            int[] countOfMonth = new int[days];
+            for (int i = 0; i < days; i++)
             {
-                dayOfMonth[i] = i;
+                dayOfMonth[i] = i+1;
                 doituongmoi.ForEach(n =>
                 {
-                    if (n.day == i)
+                    if (n.day == i+1)
                     {
                         valueOrderMonth[i] = n.amount;
                         countOfMonth[i] = n.count;
                     }
                 });
             }
-            for (int iiii = 0; iiii < 31; iiii++)
-            {
-                System.Diagnostics.Debug.WriteLine(dayOfMonth[iiii] + " ---- " + valueOrderMonth[iiii] + " --- " + countOfMonth[iiii]);
-            }
-
             ViewBag.i = dayOfMonth;
             ViewBag.ii = valueOrderMonth;
             ViewBag.iii = countOfMonth;
-
-            //foreach (var i in doituongmoi)
-            //{
-            //    System.Diagnostics.Debug.WriteLine(i.day + " ----- " + i.amount + " --------" + i.count);
-            //}
 
             ViewBag.thang = k;
             return View();
@@ -243,17 +234,15 @@ namespace BTL_ClientServer.Controllers
 
         //lấy danh sách sản phẩm được mua nhiều nhất trong 1 tháng nào đó
         [HttpGet]
-        public ActionResult XemSanPhamBanChayTrongThang(int thang)
+        public ActionResult XemSanPhamBanChayTrongThang(int thang,int? page)
         {
             var pId = new SqlParameter { ParameterName = "thang", Value = thang };
             string query = "EXEC XemSanPhamBanChayNhatTrongThang @thang";
             var kq = db.Database.SqlQuery<SanPhamDto>(query, pId).ToList();
-            System.Diagnostics.Debug.WriteLine("thang = ", thang);
-            foreach (SanPhamDto k in kq)
-            {
-                System.Diagnostics.Debug.WriteLine(k.TenSanPham);
-            }
-            return PartialView(kq.OrderByDescending(n => n.SoSanPham).ToList());
+            ViewBag.thang = thang;
+            int pageSize = 5;
+            int pageNumber = page ?? 1;
+            return View(kq.OrderByDescending(n => n.SoSanPham).ToPagedList(pageNumber,pageSize));
         }
         //lấy danh sách sản phẩm không được mua trong tháng nào đó
         [HttpGet]
@@ -262,11 +251,7 @@ namespace BTL_ClientServer.Controllers
             var pId = new SqlParameter { ParameterName = "thang", Value = thang };
             string query = "EXEC XemSanPhamKhongBanTrongThang @thang";
             var kq = db.Database.SqlQuery<SanPham>(query, pId).ToList();
-            System.Diagnostics.Debug.WriteLine("thang = ", thang);
-            foreach (SanPham k in kq)
-            {
-                System.Diagnostics.Debug.WriteLine(k.TenSanPham);
-            }
+            
             return PartialView(kq.OrderByDescending(n => n.Gia).ToList());
         }
     }

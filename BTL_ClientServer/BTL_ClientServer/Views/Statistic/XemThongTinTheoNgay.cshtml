@@ -1,8 +1,12 @@
-﻿@model IEnumerable<BTL_ClientServer.Models.Dto.KhachHangDto>
+﻿@*@model IEnumerable<BTL_ClientServer.Models.Dto.KhachHangDto>*@
+@model PagedList.IPagedList<BTL_ClientServer.Models.Dto.KhachHangDto>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "XemThongTinTheoNgay";
     Layout = "~/Views/Shared/_Layout_ThongKe.cshtml";
 }
+
 <div class="row text-center">
     <div class="col-md-5 ok" style="overflow:scroll">
         <h2 id="id-thang" id-thang="@ViewBag.thang">Danh sách khách trong tháng  @ViewBag.thang</h2>
@@ -21,17 +25,19 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr class="tr">
+                    <tr class="tr text-black-2" style="color:rebeccapurple">
                         <td class="ng" id-ngay="@item.Ngay" id-kh="@item.Id">@item.Ngay</td>
                         <td><h3>@item.TenKhachHang</h3></td>
                         <td>@item.SoLuongOrder</td>s
                         <td>@item.SoLuongSanPham</td>
-                        <td><h3 class="btn btn-block xemchitiet">Xem</h3></td>
+                        <td><h3 class="btn btn-block xemchitiet ">Xem</h3></td>
                     </tr>
                 }
             </tbody>
         </table>
-
+        <br />
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) trong tổng số : @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("XemThongTinTheoNgay", new { page,ViewBag.thang  }))
     </div>
     <div class="col-md-7">
         <h2>Thông Tin Chi Tiết</h2>

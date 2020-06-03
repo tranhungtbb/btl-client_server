@@ -1,4 +1,14 @@
-﻿@model IEnumerable<BTL_ClientServer.Models.Dto.SanPhamDto>
+﻿
+@{
+    ViewBag.Title = "XemSanPhamBanChayTrongThang";
+    Layout = "~/Views/Shared/_Layout_ThongKe.cshtml";
+}
+
+@*@model IEnumerable<BTL_ClientServer.Models.Dto.SanPhamDto>*@
+@model PagedList.IPagedList<BTL_ClientServer.Models.Dto.SanPhamDto>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 <table class="table  table-dark">
     <thead class="thead-dark">
         <tr>
@@ -25,3 +35,9 @@
         }
     </tbody>
 </table>
+
+<br />
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) trong tổng số : @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("XemSanPhamBanChayTrongThang", new { page, ViewBag.thang }))
+
+
