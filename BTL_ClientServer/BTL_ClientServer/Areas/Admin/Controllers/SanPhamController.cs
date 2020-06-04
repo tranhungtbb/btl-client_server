@@ -49,10 +49,16 @@ namespace BTL_ClientServer.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,MaSanPham,TenSanPham,Gia,DoiTuongSuDung,KichThuocBeMat,ChatLieuMatKinh,ChatLieuDay,DoDay,DoDai,DoRongCuaDay,KieuKhoa,ChatLieuVoMay,May,KhaNangChiuNuoc,GiamGia,IdThuongHieu,IdLoaiSanPham,NgayCapNhap")] SanPham sanPham)
+        public ActionResult Create([Bind(Include = "Id,MaSanPham,TenSanPham,Gia,DoiTuongSuDung,KichThuocBeMat,ChatLieuMatKinh,ChatLieuDay,DoDay,DoDai,DoRongCuaDay,KieuKhoa,ChatLieuVoMay,May,KhaNangChiuNuoc,GiamGia,IdThuongHieu,IdLoaiSanPham,NgayCapNhap")] SanPham sanPham, string tenanh)
         {
             if (ModelState.IsValid)
             {
+                Image img = new Image();
+                var IdImgMax = db.Images.Max(x => x.Id);
+                img.Id = IdImgMax + 1;
+                img.TenAnh = "";
+                img.IdSanPham = sanPham.Id;
+                db.Images.Add(img);
                 db.SanPhams.Add(sanPham);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -133,9 +139,9 @@ namespace BTL_ClientServer.Areas.Admin.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Search(String n1)
+        public ActionResult Search(String tenSanPham)
         {
-            var listSanPham = db.SanPhams.Where(n => n.TenSanPham.Contains(n1)).ToList();
+            var listSanPham = db.SanPhams.Where(n => n.TenSanPham.Contains(tenSanPham)).ToList();
             //var listSanPham = db._SanPham.Where(n => n.TenSanPham.Contains(n1)).ToList();
             //var listSanPham = db.SanPhams.Where(n => n.TenSanPham.Contains(n1)).Where(n => n.Gia > 1000000).ToList();
             var soLuongSanPham = listSanPham.Count;

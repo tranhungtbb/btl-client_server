@@ -17,7 +17,7 @@
             else
             {
                 <div class="row">
-                    <h2>Có <strong>@ViewBag.soSP </strong>kết quả tìm kiếm</h2>
+                    @*<h2>Có <strong>@ViewBag.soSP </strong>kết quả tìm kiếm</h2>*@
                     @foreach (var item in ViewBag.listSanPham)
                     {
                         var img = (new BTL_ClientServer.Models.Functions.SanPham()).GetImageByProductId(item.Id)[0].TenAnh;
@@ -43,4 +43,6 @@
         </div>
     </div>
 </div>
+
+
 

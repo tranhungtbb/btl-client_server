@@ -127,5 +127,7 @@ namespace BTL_ClientServer.Models.Entity
                 .WithOptional(e => e.ThuongHieu)
                 .HasForeignKey(e => e.IdThuongHieu);
         }
+
+        public System.Data.Entity.DbSet<BTL_ClientServer.Models.Objects._SanPham> _SanPham { get; set; }
     }
 }

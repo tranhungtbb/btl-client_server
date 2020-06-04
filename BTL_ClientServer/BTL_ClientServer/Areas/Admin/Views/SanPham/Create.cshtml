@@ -4,11 +4,10 @@
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/HomeAdmin/Index.cshtml";
 }
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "SanPham", FormMethod.Post, new { @enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Thêm Sản Phẩm</h4>
         <hr />
@@ -156,7 +155,10 @@
                 @Html.ValidationMessageFor(model => model.NgayCapNhap, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Example file input</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />

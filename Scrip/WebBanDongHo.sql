@@ -90,25 +90,25 @@ create table ChiTietHoaDon(
 )
 select * from ThuongHieu
 insert into ThuongHieu
-values('1','Julius',N'Đồng hồ Julius Hàn Quốc',N'Thương hiệu Đồng hồ Julius Hàn Quốc sản xuất theo tiêu chuẩn quốc tế. Sử dụng công nghệ Nhật Bản với máy Nhật nhập khẩu 100% từ Citizen. Lắp ráp tại Trung Quốc. Đồng hồ Julius thiết kế bởi chuyên gia thời trang hàng đầu Hàn Quốc với hơn 1000 mẫu đồng hồ thời trang dành cho giới trẻ yêu thích thời trang và phá cách',
+values('Julius',N'Đồng hồ Julius Hàn Quốc',N'Thương hiệu Đồng hồ Julius Hàn Quốc sản xuất theo tiêu chuẩn quốc tế. Sử dụng công nghệ Nhật Bản với máy Nhật nhập khẩu 100% từ Citizen. Lắp ráp tại Trung Quốc. Đồng hồ Julius thiết kế bởi chuyên gia thời trang hàng đầu Hàn Quốc với hơn 1000 mẫu đồng hồ thời trang dành cho giới trẻ yêu thích thời trang và phá cách',
 N'Được thành lập tại Seoul – Hàn Quốc năm 2001. Với những gì đã đạt được, Julius đã trở thành một thương hiệu lớn mang tầm quốc tế năm 2015. Lấy phương châm hoạt động: Always on the run way of fashion exploration, Julius luôn không ngừng cho ra bộ sưu tập mới nhất đáp ứng nhu cầu thời trang, khẳng định cá tính và đẳng cấp của giới trẻ. Sản phẩm của Julius luôn
 đem lại sức sống mới, thể hiện nét đẹp tinh tế, cuốn hút đặc trưng đến từ xứ sở kim chi'),
 
-('2','SRWATCH',N'Đồng hồ SRWATCH',N'Thương hiệu Đồng hồ SRWATCH được sáng lập bởi Kama – một cậu bé bị mồ côi cha mẹ sau vụ nổ bom nguyên tử, lớn lên từ 1 anh thợ học việc tại xưởng sản xuất linh kiện đồng hồ tại Tokyo đã trở thành người thợ giỏi nhất xưởng. Năm 1985, Kama thành lập thương hiệu đồng hồ SRWATCH lấy tên từ 2 con Santoso ( Yên bình- an lành) và Ruby (Ngọc bích).',
+('SRWATCH',N'Đồng hồ SRWATCH',N'Thương hiệu Đồng hồ SRWATCH được sáng lập bởi Kama – một cậu bé bị mồ côi cha mẹ sau vụ nổ bom nguyên tử, lớn lên từ 1 anh thợ học việc tại xưởng sản xuất linh kiện đồng hồ tại Tokyo đã trở thành người thợ giỏi nhất xưởng. Năm 1985, Kama thành lập thương hiệu đồng hồ SRWATCH lấy tên từ 2 con Santoso ( Yên bình- an lành) và Ruby (Ngọc bích).',
 N'SRWATCH mở ra một kỷ nguyên mới cho đồng hồ Nhật Bản: “Đồng hồ quốc dân”. Các thiết kế của SRWATCH không chỉ dành cho tầng lớp thượng lưu, thương gia, nghệ sĩ hay nhân viên công sở, các chị nội trợ hay thanh thiếu niên sinh viên…SRWATCH luôn là sự lưa chọn hợp lý và tinh tế.'),
 
-('3','Valence',N'Đồng hồ cao cấp Valence',N'Thương hiệu đồng hồ cao cấp Valence được thành lập vào năm 2001 tại Seoul, Hàn Quốc. Đồng hồ Valence xuất phát từ câu chuyện cậu bé Napoleon một sĩ quan pháo binh ở Valence trở thành 1 người đàn ông vĩ đại trong lịch sử trung đại Pháp.',
+('Valence',N'Đồng hồ cao cấp Valence',N'Thương hiệu đồng hồ cao cấp Valence được thành lập vào năm 2001 tại Seoul, Hàn Quốc. Đồng hồ Valence xuất phát từ câu chuyện cậu bé Napoleon một sĩ quan pháo binh ở Valence trở thành 1 người đàn ông vĩ đại trong lịch sử trung đại Pháp.',
 N'Đồng hồ Valence ra đời với ý nghĩa như một thành phố nhỏ trên tay của mỗi người để tạo nên một Napoleon vĩ đại tiếp theo. làm nên lịch sử riêng của chính mình, lịch sử của một người đàn ông vĩ đại: “The Man’s History Begin”'),
 
-('4','Sunrise',N'Đồng hồ Sunrise',N'Thương hiệu Đồng hồ Sunrise của Thụy Sĩ được trang bị bộ máy Nhật Bản với độ chính xác cao. Các chất liệu dây da, thép không gỉ, kính sapphire được sử dụng trong chế tác đồng hồ Sunrise  đảm bảo độ bền bỉ của đồng hồ theo thời gian.',
+('Sunrise',N'Đồng hồ Sunrise',N'Thương hiệu Đồng hồ Sunrise của Thụy Sĩ được trang bị bộ máy Nhật Bản với độ chính xác cao. Các chất liệu dây da, thép không gỉ, kính sapphire được sử dụng trong chế tác đồng hồ Sunrise  đảm bảo độ bền bỉ của đồng hồ theo thời gian.',
 N'Đồng hồ Sunrise được thiết kế đa phong cách thời trang, thời thượng, với mẫu mã đẹp, chất lượng cao, vận hành chuẩn xác. Được lắp ráp tại Trung Quốc nơi có nguồn nhân lực lớn và vật liệu giá rẻ, giúp làm giảm giá thành sản phẩm xuống mức thấp nhất, phù hợp với nhu cầu cũng như khả năng tài chính của các bạn trẻ. Cùng với đó là quy trình kiểm định nghiêm ngặt của Thụy Sĩ nên sản phẩm được tạo ra có chất lượng cao, đảm bảo khả năng sử dụng.'),
 
-('5','Henry London',N'Đồng hồ Henry London',N'Thương hiệu Đồng hồ Henry London Lấy cảm hứng từ chiếc đồng hồ vintage cổ. Điểm đặc biệt của Henry London là đặc tính có thể khắc chữ gửi thông điệp yêu thương lên mặt sau đồng hồ. Chính vì thế, chiếc đồng hồ trở thành món quà đặc biệt bạn gửi tặng đến người thân, bạn bè.'
+('Henry London',N'Đồng hồ Henry London',N'Thương hiệu Đồng hồ Henry London Lấy cảm hứng từ chiếc đồng hồ vintage cổ. Điểm đặc biệt của Henry London là đặc tính có thể khắc chữ gửi thông điệp yêu thương lên mặt sau đồng hồ. Chính vì thế, chiếc đồng hồ trở thành món quà đặc biệt bạn gửi tặng đến người thân, bạn bè.'
 ,N'Henry London sử dụng mặt kính acrylic, cho phép đánh bóng thành công bất kì vết trầy xước nhỏ nào, giúp bạn khôi phục như mới chiếc đồng hồ mình yêu thích')
 select * from LoaiSanPham
-insert into LoaiSanPham values('1',N'Đồng hồ đeo tay nữ'),
-('2',N'Đồng hồ đeo tay nam'),
-('3',N'Đồng hồ đôi')
+insert into LoaiSanPham values(N'Đồng hồ đeo tay nữ'),
+(N'Đồng hồ đeo tay nam'),
+(N'Đồng hồ đôi')
 
 select *  from ThuongHieu
 delete from SanPham

@@ -1,8 +1,10 @@
---alter table SanPham
---add NgayCapNhap date
+alter table SanPham
+add NgayCapNhap date
 
+alter table SanPham
+add Gia decimal(18,2)
 
-create or alter proc SanPhamPhoBien -- so lan xuat hien trong hoa don nhieu nhat
+create proc SanPhamPhoBien -- so lan xuat hien trong hoa don nhieu nhat
 as
 begin
 	select sp.Id , sp.TenSanPham, sp.Gia,sp.GiamGia,sp.NgayCapNhap
@@ -12,7 +14,7 @@ begin
 	order by count(ct.IdSanPham) desc
 end
 
-create or alter proc SanPhamBanChay -- trong 5 thang gan day
+create proc SanPhamBanChay -- trong 5 thang gan day
 as
 begin
 	select ct.IdSanPham as Id ,sp.TenSanPham, sp.Gia,sp.GiamGia,sp.NgayCapNhap
@@ -26,7 +28,7 @@ begin
 end
 
 
-create or alter proc SanPhamGiamGia
+create proc SanPhamGiamGia
 as
 begin
 	select sp.Id , sp.TenSanPham, sp.Gia ,sp.GiamGia ,sp.NgayCapNhap
@@ -35,7 +37,7 @@ begin
 	order by sp.GiamGia desc
 end
 
-create or alter proc SanPhamMoi
+create  proc SanPhamMoi
 as
 begin
 	select sp.Id , sp.TenSanPham, sp.Gia ,sp.GiamGia ,sp.NgayCapNhap
@@ -43,8 +45,8 @@ begin
 	group by sp.Id , sp.TenSanPham, sp.Gia,sp.GiamGia ,sp.NgayCapNhap
 	order by sp.NgayCapNhap desc
 end
-
-create or alter proc SanPhamDacBiet
+SanPhamMoi
+create proc SanPhamDacBiet
 as
 begin
 	select sp.Id , sp.TenSanPham, sp.Gia ,sp.GiamGia,sp.NgayCapNhap

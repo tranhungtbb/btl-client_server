@@ -5,7 +5,7 @@ add Gia decimal(18,2),
 	TienGiamGia decimal(18,2),
 	ThanhTienSauGiamGia decimal(18,2)
 select * from ChiTietHoaDon
-create or alter trigger Update_Insert_ChiTietHoaDon on ChiTietHoaDon for insert,update
+create trigger Update_Insert_ChiTietHoaDon on ChiTietHoaDon for insert,update
 as
 begin
 	declare @IdHoaDon int,@IdSanPham int,@SL int,@PhanTramGiamGia int,@Gia decimal(18,2), @TienGiamGia decimal(18,2)
@@ -23,7 +23,7 @@ begin
 		set TongTien = (select sum (ThanhTienSauGiamGia) from ChiTietHoaDon where IdHoaDon= @IdHoaDon)
 		where Id = @IdHoaDon
 end
-create or alter trigger Delete_ChiTietHoaDon on ChiTietHoaDon for delete
+create  trigger Delete_ChiTietHoaDon on ChiTietHoaDon for delete
 as
 begin
 	declare @IdHoaDon int,@IdSanPham int
@@ -39,7 +39,7 @@ add PhanTramGiamGia int,
 
 alter table HoaDon modify TongTien default 0 ??? -- déo hiểu sao default k đuọc
 
-create or alter trigger Update_Insert_HoaDon on HoaDon for update
+create  trigger Update_Insert_HoaDon on HoaDon for update
 as
 begin
 	declare @IdHoaDon int,@IdGiamGia int,@PhanTramGiamGia int,@TongTien decimal(18,2), @TienGiamGia decimal(18,2)
